@@ -22,6 +22,7 @@ class Router
 
     public function __construct(array $routes)
     {
+        $this->initCSRF();
         // ajouter les routes qui sont dans $routes au router symfony
         $this->provisionRoutes($routes);
         $this->makeRequestContext();
@@ -31,6 +32,20 @@ class Router
             [$this->controller, $this->method] = $this->urlMatching();
         } catch (\Exception) {
             HttpException::render();
+        }
+    }
+
+    // vérification du token sur le site
+    protected function initCSRF(): void
+    {
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            try {
+                if(!isset($_POST['_token']) || $_POST['_token'] !== $_SESSION['_token']) {
+                    throw new HttpException();
+                }
+            } catch(HttpException) {
+                HttpException::render(403, 'Vous ne pouvez pas faire ça !');
+            }
         }
     }
 

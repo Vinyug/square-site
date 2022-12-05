@@ -41,6 +41,16 @@ class App {
     protected function initSession(): void
     {
         Session::init();
+        // correction faille CSRF par génération d'un token
+        Session::add('_token', Session::get('_token') ?? $this->generateCsrfToken());
+    }
+
+    protected function generateCsrfToken(): string
+    {
+        // convertir bin vers hexa
+        $length = Config::get('hashing.csrf_token_length');
+        $token = bin2hex(random_bytes($length));
+        return $token;
     }
 
     // méthode pour rendre la réponse et transmettre au client
