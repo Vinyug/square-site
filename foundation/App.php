@@ -2,6 +2,7 @@
 
 namespace VGuyomarch\Foundation;
 
+use Illuminate\Database\Capsule\Manager as Capsule;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use VGuyomarch\Foundation\Exceptions\HttpException;
 use VGuyomarch\Foundation\Router\Router;
@@ -19,6 +20,7 @@ class App {
             $this->initProductionExceptionHandler();
         }
         $this->initSession();
+        $this->initDatabase();
         $this->router = new Router(require ROOT.'/app/routes.php');
         
     }
@@ -51,6 +53,26 @@ class App {
         $length = Config::get('hashing.csrf_token_length');
         $token = bin2hex(random_bytes($length));
         return $token;
+    }
+
+    // initialisation gestion bdd
+    protected function initDatabase(): void
+    {
+        // définir fuseau horaire BDD
+        date_default_timezone_set('Europe/Paris');
+        
+        $capsule = new Capsule();
+        $capsule->addConnection([
+            'driver'   => Config::get('database.driver'),
+            'host'     => Config::get('database.host'),
+            'database' => Config::get('database.name'),
+            'username' => Config::get('database.username'),
+            'password' => Config::get('database.password'),
+        ]);
+        // permet de l'utiliser n'importe où
+        $capsule->setAsGlobal();
+        // Démarrer Eloquent
+        $capsule->bootEloquent();
     }
 
     // méthode pour rendre la réponse et transmettre au client
