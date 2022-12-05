@@ -2,7 +2,7 @@
 
 namespace VGuyomarch\Foundation;
 
-use Ssil\Foundation\Router\Router;
+use VGuyomarch\Foundation\Router\Router;
 
 abstract class AbstractController
 {
