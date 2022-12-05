@@ -2,6 +2,7 @@
 
 namespace VGuyomarch\Foundation;
 
+use Symfony\Component\Routing\Generator\UrlGenerator;
 use VGuyomarch\Foundation\Exceptions\HttpException;
 use VGuyomarch\Foundation\Router\Router;
 
@@ -48,5 +49,10 @@ class App {
         // echo 'Hello world';
         $this->router->getInstance();
         Session::resetFlash();
+    }
+
+    public function getGenerator(): UrlGenerator
+    {
+        return $this->router->getGenerator();
     }
 }

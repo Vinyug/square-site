@@ -3,6 +3,7 @@
 namespace VGuyomarch\Foundation\Router;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
@@ -75,5 +76,17 @@ class Router
                 unset($this->params[$key]);
             }
         }
+    }
+
+    public function getGenerator(): UrlGenerator
+    {
+        return new UrlGenerator($this->routes, $this->context);
+    }
+
+    public static function get(string $name, array $data = []): string
+    {
+        $generator = $GLOBALS['app']->getGenerator();
+        $uri = $generator->generate($name, $data);
+        return $uri;
     }
 }

@@ -6,9 +6,7 @@
         "twig/twig": "^3.4.3",
         "symfony/http-foundation": "^5.4",
         "vlucas/valitron": "^1.4",
-        "fakerphp/faker": "^1.17",
-        "gravatarphp/gravatar": "^1.0",
-        "cocur/slugify" : "^4.2"
+        "fakerphp/faker": "^1.17"
     },
     "autoload": {
         "psr-4": {
@@ -17,4 +15,3 @@
         }
     }
 }
-

@@ -7,7 +7,6 @@ use VGuyomarch\Foundation\Router\Route;
 // Extraire l'URL et regarder l'URI
 // On pourra demander au rooter quel action effectuer
 
-
 return [
     'index' => Route::get('/',[BaseController::class, 'index']),
 ];
