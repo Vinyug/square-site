@@ -17,6 +17,7 @@ class App {
         if(Config::get('app.env') === 'production') {
             $this->initProductionExceptionHandler();
         }
+        $this->initSession();
         $this->router = new Router(require ROOT.'/app/routes.php');
         
     }
@@ -36,10 +37,16 @@ class App {
         );
     }
     
+    protected function initSession(): void
+    {
+        Session::init();
+    }
+
     // méthode pour rendre la réponse et transmettre au client
     public function render(): void 
     {
         // echo 'Hello world';
         $this->router->getInstance();
+        Session::resetFlash();
     }
 }
