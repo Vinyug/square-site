@@ -12,7 +12,6 @@ class BaseController extends AbstractController
     public function index(): void
     {
         $faker = Factory::create();
-        echo Router::get('index');
         View::render('index', [
             'city' => $faker->city, 
         ]);
