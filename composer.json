@@ -1,12 +1,12 @@
 {
     "require": {
-        "vlucas/phpdotenv": "5.3",
-        "illuminate/database": "8.36",
-        "symfony/routing": "5.4",
-        "twig/twig": "3.1",
-        "symfony/http-foundation": "5.4",
-        "vlucas/valitron": "1.4",
-        "fakerphp/faker": "1.17"
+        "vlucas/phpdotenv": "^5.3",
+        "illuminate/database": "^8.36",
+        "symfony/routing": "^5.4",
+        "twig/twig": "^3.4.3",
+        "symfony/http-foundation": "^5.4",
+        "vlucas/valitron": "^1.4",
+        "fakerphp/faker": "^1.17"
     },
     "autoload": {
         "psr-4": {
