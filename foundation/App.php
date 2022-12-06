@@ -59,7 +59,7 @@ class App {
     protected function initDatabase(): void
     {
         // définir fuseau horaire BDD
-        date_default_timezone_set('Europe/Paris');
+        date_default_timezone_set(Config::get('app.timezone'));
         
         $capsule = new Capsule();
         $capsule->addConnection([
