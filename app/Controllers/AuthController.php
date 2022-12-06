@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use VGuyomarch\Foundation\AbstractController;
-use VGuyomarch\Foundation\Authentication;
+use VGuyomarch\Foundation\Authentication as Auth;
 use VGuyomarch\Foundation\View;
 
 class AuthController extends AbstractController
@@ -11,7 +11,7 @@ class AuthController extends AbstractController
     public function registerForm(): void
     {
         // si user authenticate redirection vers home
-        if(Authentication::check()) {
+        if(Auth::check()) {
             $this->redirection('home');
         }
 

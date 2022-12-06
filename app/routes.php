@@ -2,6 +2,7 @@
 
 use App\Controllers\AuthController;
 use App\Controllers\BaseController;
+use App\Controllers\HomeController;
 use VGuyomarch\Foundation\Router\Route;
 
 // routage avec symphony rooting
@@ -13,4 +14,7 @@ return [
 
     // Authentification
     'register.form' => Route::get('/inscription', [AuthController::class, 'registerForm']),
+
+    // Espace membre
+    'home' => Route::get('/compte', [HomeController::class, 'index']),
 ];
