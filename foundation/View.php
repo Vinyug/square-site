@@ -4,6 +4,7 @@ namespace VGuyomarch\Foundation;
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use Twig\TwigFunction;
 
 // utilisation de twig, permet une syntaxe particulière et intègre par défaut une sécurité de la faille XSS
 // avec htmlspecialchars()
@@ -42,6 +43,28 @@ class View
             'cache' => ROOT.'/cache/twig',
             'auto_reload' => true,
         ]);
+        foreach (Config::get('twig.functions') as $helper) {
+            $twig->addFunction(new TwigFunction($helper, $helper));
+        }
         return $twig;
+    }
+
+    // retourner un field html hidden avec un token pour protéger du CSRF
+    public static function csrfField(): string
+    {
+        return sprintf('<input type="hidden" name="_token" value="%s">', Session::get('_token'));
+    }
+    
+    // retourner un field html hidden et spécifier la method http
+    public static function method(string $httpMethod): string
+    {
+        return sprintf('<input type="hidden" name="_method" value="%s">', $httpMethod);
+    }
+
+    // récupérer les fields précédemment renseigner et les remettre (pour ne pas tout retaper)
+    public static function old(string $key, mixed $default = null): mixed
+    {
+        $old = Session::getFlash(Session::OLD);
+        return $old[$key] ?? $default;
     }
 }

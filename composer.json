@@ -12,6 +12,9 @@
         "psr-4": {
             "VGuyomarch\\Foundation\\": "./foundation",
             "App\\": "./app"
-        }
+        },
+        "file" : [
+            "./function/twig.php"
+        ]
     }
 }
