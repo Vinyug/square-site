@@ -14,7 +14,15 @@ class AuthController extends AbstractController
         if(Auth::check()) {
             $this->redirection('home');
         }
-
+        
         View::render('auth.register');
+    }
+    
+    // enregistrer nouveau user
+    public function register(): void
+    {
+        if(Auth::check()) {
+            $this->redirection('home');
+        }
     }
 }

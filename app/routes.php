@@ -14,6 +14,7 @@ return [
 
     // Authentification
     'register.form' => Route::get('/inscription', [AuthController::class, 'registerForm']),
+    'register.request' => Route::post('/inscription', [AuthController::class, 'register']),
 
     // Espace membre
     'home' => Route::get('/compte', [HomeController::class, 'index']),
