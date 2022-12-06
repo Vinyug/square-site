@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+use App\Controllers\AuthController;
 use App\Controllers\BaseController;
 use VGuyomarch\Foundation\Router\Route;
 
@@ -9,4 +10,7 @@ use VGuyomarch\Foundation\Router\Route;
 
 return [
     'index' => Route::get('/',[BaseController::class, 'index']),
+
+    // Authentification
+    'register.form' => Route::get('/inscription', [AuthController::class, 'registerForm']),
 ];
