@@ -38,7 +38,7 @@ if(!function_exists('errors')) {
 if(!function_exists('status')) {
     function status(): ?string
     {
-        return Session::getFlash((Session::STATUS));
+        return Session::getFlash(Session::STATUS);
     }
 }
 
