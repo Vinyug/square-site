@@ -2,13 +2,12 @@
 
 namespace VGuyomarch\Foundation\Router;
 
+use VGuyomarch\Foundation\Exceptions\HttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
-use VGuyomarch\Foundation\Exceptions\HttpException;
-use VGuyomarch\Foundation\Router\Route;
 
 class Router 
 {

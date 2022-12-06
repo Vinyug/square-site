@@ -3,9 +3,9 @@
 namespace VGuyomarch\Foundation;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
-use Symfony\Component\Routing\Generator\UrlGenerator;
 use VGuyomarch\Foundation\Exceptions\HttpException;
 use VGuyomarch\Foundation\Router\Router;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 
 class App {
 

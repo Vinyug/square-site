@@ -3,18 +3,18 @@
         "vlucas/phpdotenv": "^5.3",
         "illuminate/database": "^8.83.26",
         "symfony/routing": "^5.4",
-        "twig/twig": "^3.4.3",
         "symfony/http-foundation": "^5.4",
         "vlucas/valitron": "^1.4",
-        "fakerphp/faker": "^1.17"
+        "fakerphp/faker": "^1.17",
+        "twig/twig": "^3.4"
     },
     "autoload": {
         "psr-4": {
             "VGuyomarch\\Foundation\\": "./foundation",
             "App\\": "./app"
         },
-        "file" : [
-            "./function/twig.php"
+        "files": [
+            "./functions/twig.php"
         ]
     }
 }
