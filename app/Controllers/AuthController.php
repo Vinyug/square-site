@@ -100,4 +100,15 @@ class AuthController extends AbstractController
         Session::addFlash(Session::OLD, $_POST);
         $this->redirection('login.form');
     }
+
+    // gérer deconnexion
+    public function logout(): void 
+    {
+        // si user authenticate deconnect son id session
+        if(Auth::check()) {
+            Auth::logout();
+        }
+
+        $this->redirection('login.form');
+    }
 }

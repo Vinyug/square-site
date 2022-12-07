@@ -17,6 +17,7 @@ return [
     'register.request' => Route::post('/inscription', [AuthController::class, 'register']),
     'login.form' => Route::get('/connexion', [AuthController::class, 'loginForm']),
     'login.request' => Route::post('/connexion', [AuthController::class, 'login']),
+    'logout' => Route::post('/deconnexion', [AuthController::class, 'logout']),
 
     // Espace membre
     'home' => Route::get('/compte', [HomeController::class, 'index']),
