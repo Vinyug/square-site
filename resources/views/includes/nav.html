@@ -1,8 +1,8 @@
 <nav x-show="nav" class="self-end mt-6 text-xl leading-none text-right">
     <ul class="space-y-8">
-        {% if auth().checkd() %}
+        {% if auth().check() %}
 
-        <li><a href="{{ route('home.form') }}" class="hover:underline">Mon compte</a></li>
+        <li><a href="{{ route('home') }}" class="hover:underline">Mon compte</a></li>
 
         {% if auth().checkIsAdmin() %}
         <li><a href="posts/create.html" class="hover:underline">Créer un post</a></li>
