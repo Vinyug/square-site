@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
 use VGuyomarch\Foundation\AbstractController;
 use VGuyomarch\Foundation\Authentication as Auth;
 use VGuyomarch\Foundation\Session;
@@ -36,7 +37,7 @@ class AuthController extends AbstractController
             'password' => ['required', ['lengthMin', 8], ['equals', 'password_confirmation']],
         ]);
         
-        // action si fields non renseigné correctement
+        // action si fields non renseignés correctement
         if(!$validator->validate()) {
             // récupère le message d'erreur
             Session::addFlash(Session::ERRORS, array_column($validator->errors(), 0));
@@ -44,5 +45,13 @@ class AuthController extends AbstractController
             Session::addFlash(Session::OLD, $_POST);
             $this->redirection('register.form');
         }
+
+        // insert en BDD
+        // hashing du password pour sécurité en BDD
+        $user = User::create([
+            'name' => $_POST['name'],
+            'email' => $_POST['email'],
+            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+        ]);
     }
 }
