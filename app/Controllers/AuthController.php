@@ -11,6 +11,7 @@ use VGuyomarch\Foundation\View;
 
 class AuthController extends AbstractController
 {
+    // view register
     public function registerForm(): void
     {
         // si user authenticate redirection vers home
@@ -58,4 +59,25 @@ class AuthController extends AbstractController
         Auth::authenticate($user->id);
         $this->redirection('home');
     } 
+
+    // view login
+    public function loginForm(): void
+    {
+        // si user authenticate redirection vers home
+        if(Auth::check()) {
+            $this->redirection('home');
+        }
+        
+        View::render('auth.login');
+    }
+    
+    // créer la route
+    public function login(): void
+    {
+        // si user authenticate redirection vers home
+        if(Auth::check()) {
+            $this->redirection('home');
+        }
+
+    }
 }
