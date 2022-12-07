@@ -57,5 +57,5 @@ class AuthController extends AbstractController
         // authentifier l'user avec un id
         Auth::authenticate($user->id);
         $this->redirection('home');
-    }
+    } 
 }
