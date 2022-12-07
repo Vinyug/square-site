@@ -3,6 +3,7 @@
 use App\Controllers\AuthController;
 use App\Controllers\BaseController;
 use App\Controllers\HomeController;
+use App\Controllers\PostController;
 use VGuyomarch\Foundation\Router\Route;
 
 // routage avec symphony rooting
@@ -24,4 +25,7 @@ return [
     'home.updateName' => Route::patch('/compte', [HomeController::class, 'updateName']),
     'home.updateEmail' => Route::patch('/compte/email', [HomeController::class, 'updateEmail']),
     'home.updatePassword' => Route::patch('/compte/password', [HomeController::class, 'updatePassword']),
+
+    // Blog
+    'posts.create' => Route::get('/posts/creer', [PostController::class, 'create']),
 ];
