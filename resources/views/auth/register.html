@@ -47,9 +47,9 @@
                 <form action="{{ route('register.request') }}" method="POST" class="flex flex-col space-y-6" novalidate>
                     <div class="rounded-md shadow-sm -space-y-px">
                         {{ csrf_field()|raw }}
-                        <input name="name" type="text" placeholder="Nom complet"
+                        <input name="name" type="text" value="{{ old('name') }}" placeholder="Nom complet"
                             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
-                        <input name="email" type="email" placeholder="Adresse e-mail"
+                        <input name="email" type="email" value="{{ old('email') }}" placeholder="Adresse e-mail"
                             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
                         <input name="password" type="password" placeholder="Mot de passe"
                             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
