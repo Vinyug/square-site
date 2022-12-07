@@ -53,5 +53,9 @@ class AuthController extends AbstractController
             'email' => $_POST['email'],
             'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
         ]);
+
+        // authentifier l'user avec un id
+        Auth::authenticate($user->id);
+        $this->redirection('home');
     }
 }
