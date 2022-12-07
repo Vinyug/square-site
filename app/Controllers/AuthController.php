@@ -39,7 +39,7 @@ class AuthController extends AbstractController
         // action si fields non renseigné correctement
         if(!$validator->validate()) {
             // récupère le message d'erreur
-            Session::addFlash(Session::ERRORS, array_column($validator->errors, 0));
+            Session::addFlash(Session::ERRORS, array_column($validator->errors(), 0));
             // field reprend une valeur déjà renseigné
             Session::addFlash(Session::OLD, $_POST);
             $this->redirection('register.form');
