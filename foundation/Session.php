@@ -31,7 +31,7 @@ class Session
         return $_SESSION[$key] ?? null;
     }
 
-    public static function remove(string $key): mixed
+    public static function remove(string $key): void
     {
         unset($_SESSION[$key]);
     }
