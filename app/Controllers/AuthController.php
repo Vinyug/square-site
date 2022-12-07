@@ -79,5 +79,25 @@ class AuthController extends AbstractController
             $this->redirection('home');
         }
 
+        // récupération des données de form pour validation
+        $validator = Validator::get($_POST);
+        // indiquer toutes les règles à respecter par field
+        $validator->mapFieldsRules([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        // vérifier que les données renseignées sont respectées
+        // vérifier en BDD si user exist déjà
+        if($validator->validate() && Auth::verify($_POST['email'], $_POST['password'])) {
+            $user = User::where('email', $_POST['email'])->first();
+            Auth::authenticate($user->id);
+            $this->redirection('home');
+        }
+
+        // actions si fields mal renseignés
+        Session::addFlash(Session::ERRORS, ['Identifiants erronés']);
+        Session::addFlash(Session::OLD, $_POST);
+        $this->redirection('login.form');
     }
 }
