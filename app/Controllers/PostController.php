@@ -36,7 +36,6 @@ class PostController extends AbstractController
             'title' => ['required', ['lengthMin', 3]],
             'post' => ['required', ['lengthMin', 3]],
             'file' => ['required_file', 'image', 'square'],
-            'body' => ['required', ['lengthMin', 3]],
         ]);
 
         // action si invalide
