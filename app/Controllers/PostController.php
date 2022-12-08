@@ -66,8 +66,22 @@ class PostController extends AbstractController
             ]]);
             Session::addFlash(Session::OLD, $_POST);
             $this->redirection('posts.create');
-            
         }
+
+        // Insert un post
+        $post = Post::create([
+            'users_id' => Auth::id(),
+            'title' => $_POST['title'],
+            'slug' => $slug,
+            'body' => $_POST['post'], 
+            'reading_time' => ceil(str_word_count($_POST['post']) / 238), 
+            'img' => $filename,
+        ]);
+
+        // status MAJ
+        Session::addFlash(Session::STATUS, 'Votre post a été publié !');
+        // redirection vers posts.show
+        // code en attente
     }
 
     // creation slug article avec cocur/slugify

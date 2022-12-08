@@ -28,4 +28,5 @@ return [
 
     // Blog
     'posts.create' => Route::get('/posts/creer', [PostController::class, 'create']),
+    'posts.store' => Route::post('/posts/creer', [PostController::class, 'store']),
 ];
