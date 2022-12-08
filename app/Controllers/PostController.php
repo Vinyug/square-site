@@ -4,8 +4,10 @@ namespace App\Controllers;
 
 use App\Models\Post;
 use Cocur\Slugify\Slugify;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use VGuyomarch\Foundation\AbstractController;
 use VGuyomarch\Foundation\Authentication as Auth;
+use VGuyomarch\Foundation\Exceptions\HttpException;
 use VGuyomarch\Foundation\Session;
 use VGuyomarch\Foundation\Validator;
 use VGuyomarch\Foundation\View;
@@ -82,6 +84,60 @@ class PostController extends AbstractController
         // redirection vers posts.show
         // code en attente
     }
+
+    // modifier post
+    public function edit(string $slug): void
+    {
+        if(!Auth::checkIsAdmin()) {
+            $this->redirection('login.form');
+        }
+
+        try {
+            $post = Post::where('slug', $slug)->firstOrFail();
+        } catch (ModelNotFoundException) {
+            HttpException::render();
+        }
+
+        View::render('posts.edit', [
+            'post' => $post,
+        ]);
+    }
+    
+    // update post
+    public function update(string $slug): void
+    {
+        if(!Auth::checkIsAdmin()) {
+            $this->redirect('login.form');
+        }
+        
+        $post = Post::where('slug', $slug)->firstOrFail();
+
+        // règle Validator
+        $validator = Validator::get($_POST);
+        $validator->mapFieldsRules([
+            'title' => ['required', ['lengthMin', 3]],
+            'post' => ['required', ['lengthMin', 3]],
+        ]);
+
+        // action si invalide
+        if(!$validator->validate()) {
+            Session::addFlash(Session::ERRORS, $validator->errors());
+            Session::addFlash(Session::OLD, $_POST);
+            $this->redirection('posts.edit', ['slug' => $post->slug]);
+        }
+
+        // action si valide
+        $post->fill([
+            'title' => $_POST['title'],
+            'body' => $_POST['post'],
+            'reading_time' => ceil(str_word_count($_POST['post']) / 238),
+        ]);
+        $post->save();
+
+        Session::addFlash(Session::STATUS, 'Votre post a bien été mie à jour !');
+        // redirection vers posts.show
+    }
+
 
     // creation slug article avec cocur/slugify
     public function slugify(string $title): string 

@@ -29,4 +29,6 @@ return [
     // Blog
     'posts.create' => Route::get('/posts/creer', [PostController::class, 'create']),
     'posts.store' => Route::post('/posts/creer', [PostController::class, 'store']),
+    'posts.edit' => Route::get('/posts/{slug}/modifier', [PostController::class, 'edit']),
+    'posts.update' => Route::patch('/posts/{slug}/modifier', [PostController::class, 'update']),
 ];
