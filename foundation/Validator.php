@@ -33,6 +33,27 @@ class Validator
             $user = Authentication::get();
             return password_verify($value, $user->password);
         }, '{field} est erroné');
+        
+        // règle pour vérifier si le fichier est présent et s'il n'y a pas eu d'erreur d'upload
+        $validator->addRule('required_file', function (string $field, mixed $value, array $params, array $fields) {
+            return isset($_FILES[$field]) && $_FILES[$field]['error'] === UPLOAD_ERR_OK;
+        }, '{field} est obligatoire');
+        
+        // règle pour vérifier qu'il s'agit d'une image (à partir du type mime)
+        $validator->addRule('image', function (string $field, mixed $value, array $params, array $fields) {
+            if(isset($_FILES[$field]) && $_FILES[$field]['error'] === UPLOAD_ERR_OK) {
+                return str_starts_with($_FILES[$field]['type'], 'image/');
+            }
+            return false;
+        }, '{field} doit être une image');
 
+        // règle vérifier si image est carré
+        $validator->addRule('square', function (string $field, mixed $value, array $params, array $fields) {
+            if(isset($_FILES[$field]) && $_FILES[$field]['error'] === UPLOAD_ERR_OK) {
+                [$width, $height] = getimagesize($_FILES[$field]['tmp_name']);
+                return $width === $height;
+            }
+            return false;
+        }, '{field} doit être carré (largeur = hauteur)');
     }
 }
