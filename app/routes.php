@@ -27,6 +27,7 @@ return [
     // Blog
     'index' => Route::get('/', [PostController::class, 'index']),
     'posts.show' => Route::get('/posts/{slug}', [PostController::class, 'show']),
+    'posts.comment' => Route::post('/posts/{slug}', [PostController::class, 'comment']),
     'posts.create' => Route::get('/posts/creer', [PostController::class, 'create']),
     'posts.store' => Route::post('/posts/creer', [PostController::class, 'store']),
     'posts.edit' => Route::get('/posts/{slug}/modifier', [PostController::class, 'edit']),

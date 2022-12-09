@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Post extends Model
 {  
     protected $fillable = [
-        'users_id', 'title', 'slug', 'body', 'reading_time', 'img',
+        'user_id', 'title', 'slug', 'body', 'reading_time', 'img',
     ];
 
     // récupérer les comments associé à un post

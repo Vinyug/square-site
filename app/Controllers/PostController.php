@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use Cocur\Slugify\Slugify;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -38,6 +39,36 @@ class PostController extends AbstractController
         View::render('posts.show', [
             'post' => $post,
         ]);
+    }
+
+    // publier comment sur un post 
+    public function comment(string $slug): void
+    {
+        if(!Auth::check()) {
+            $this->redirection('login.form');
+        }
+
+        $post = Post::where('slug', $slug)->firstOrFail();
+
+        $validator = Validator::get($_POST);
+        $validator->mapFieldsRules([
+            'comment' => ['required', ['lengthMin', 3]],
+        ]);
+
+        if(!$validator->validate()) {
+            Session::addFlash(Session::ERRORS, $validator->errors());
+            Session::addFlash(Session::OLD, $_POST);
+            $this->redirection('posts.show', ['slug' => $slug]);
+        }
+        
+        Comment::create([
+            'post_id' => $post->id,
+            'user_id' => Auth::id(),
+            'body' => $_POST['comment'],
+        ]);
+        
+        Session::addFlash(Session::STATUS, 'Votre commentaire à été publié !');
+        $this->redirection('posts.show', ['slug' => $slug]);
     }
 
     // afficher view post
@@ -97,7 +128,7 @@ class PostController extends AbstractController
 
         // Insert un post
         $post = Post::create([
-            'users_id' => Auth::id(),
+            'user_id' => Auth::id(),
             'title' => $_POST['title'],
             'slug' => $slug,
             'body' => $_POST['post'], 
