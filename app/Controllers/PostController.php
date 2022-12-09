@@ -25,6 +25,21 @@ class PostController extends AbstractController
         ]);
     }
 
+    // accéder à un post
+    public function show(string $slug): void
+    {
+        // select post selon slug
+        try {
+            $post = Post::withCount('comments')->where('slug', $slug)->firstOrFail();
+        } catch (ModelNotFoundException) {
+            HttpException::render();
+        }
+
+        View::render('posts.show', [
+            'post' => $post,
+        ]);
+    }
+
     // afficher view post
     public function create(): void
     {
@@ -93,7 +108,7 @@ class PostController extends AbstractController
         // status MAJ
         Session::addFlash(Session::STATUS, 'Votre post a été publié !');
         // redirection vers posts.show
-        // code en attente
+        $this->redirection('posts.show', ['slug' => $post->slug]);
     }
 
     // modifier post
@@ -147,6 +162,7 @@ class PostController extends AbstractController
 
         Session::addFlash(Session::STATUS, 'Votre post a bien été mie à jour !');
         // redirection vers posts.show
+        $this->redirection('posts.show', ['slug' => $post->slug]);
     }
 
 
