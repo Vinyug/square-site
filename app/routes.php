@@ -11,9 +11,7 @@ use VGuyomarch\Foundation\Router\Route;
 // On pourra demander au rooter quel action effectuer
 
 return [
-    'index' => Route::get('/',[BaseController::class, 'index']),
-
-    // Authentification
+        // Authentification
     'register.form' => Route::get('/inscription', [AuthController::class, 'registerForm']),
     'register.request' => Route::post('/inscription', [AuthController::class, 'register']),
     'login.form' => Route::get('/connexion', [AuthController::class, 'loginForm']),
@@ -27,6 +25,7 @@ return [
     'home.updatePassword' => Route::patch('/compte/password', [HomeController::class, 'updatePassword']),
 
     // Blog
+    'index' => Route::get('/',[PostController::class, 'index']),
     'posts.create' => Route::get('/posts/creer', [PostController::class, 'create']),
     'posts.store' => Route::post('/posts/creer', [PostController::class, 'store']),
     'posts.edit' => Route::get('/posts/{slug}/modifier', [PostController::class, 'edit']),

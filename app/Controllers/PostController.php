@@ -14,7 +14,18 @@ use VGuyomarch\Foundation\View;
 
 class PostController extends AbstractController
 {
-    // afficher view
+    // afficher view index
+    public function index(): void
+    {
+        // afficher tous les posts sur index
+        $posts = Post::withCount('comments')->orderBy('id', 'desc')->get();
+
+        View::render('index', [
+            'posts' => $posts,
+        ]);
+    }
+
+    // afficher view post
     public function create(): void
     {
         if(!Auth::checkIsAdmin()) {
@@ -107,7 +118,7 @@ class PostController extends AbstractController
     public function update(string $slug): void
     {
         if(!Auth::checkIsAdmin()) {
-            $this->redirect('login.form');
+            $this->redirection('login.form');
         }
         
         $post = Post::where('slug', $slug)->firstOrFail();
