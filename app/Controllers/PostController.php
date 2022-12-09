@@ -19,7 +19,7 @@ class PostController extends AbstractController
     {
         // afficher tous les posts sur index
         $posts = Post::withCount('comments')->orderBy('id', 'desc')->get();
-
+        
         View::render('index', [
             'posts' => $posts,
         ]);

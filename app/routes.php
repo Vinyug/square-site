@@ -25,7 +25,7 @@ return [
     'home.updatePassword' => Route::patch('/compte/password', [HomeController::class, 'updatePassword']),
 
     // Blog
-    'index' => Route::get('/',[PostController::class, 'index']),
+    'index' => Route::get('/', [PostController::class, 'index']),
     'posts.create' => Route::get('/posts/creer', [PostController::class, 'create']),
     'posts.store' => Route::post('/posts/creer', [PostController::class, 'store']),
     'posts.edit' => Route::get('/posts/{slug}/modifier', [PostController::class, 'edit']),
