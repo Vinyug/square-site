@@ -71,6 +71,23 @@ class PostController extends AbstractController
         $this->redirection('posts.show', ['slug' => $slug]);
     }
 
+    // supprimer post
+    public function delete(string $slug): void
+    {
+        if(!Auth::checkIsAdmin()) {
+            $this->redirection('login.form');
+        }
+
+        $post = Post::where('slug', $slug)->firstOrFail();
+
+        // suppression de l'image dans le dossier puis du post en BDD
+        unlink(sprintf('%s/public/img/%s', ROOT, $post->img));
+        $post->delete();
+
+        $this->redirection('index');
+
+    }
+
     // afficher view post
     public function create(): void
     {

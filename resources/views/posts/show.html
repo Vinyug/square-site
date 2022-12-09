@@ -116,7 +116,9 @@
                                             Annuler
                                         </button>
                                     </div>
-                                    <form method="POST" action="" id="delete-form" class="hidden">
+                                    <form method="POST" action="{{ route('posts.delete', {slug: post.slug}) }}" id="delete-form" class="hidden">
+                                        {{ csrf_field()|raw }}
+                                        {{ method('DELETE')|raw }}
                                     </form>
                                 </div>
                             </div>
@@ -157,7 +159,7 @@
             </article>
             <div class="mt-10 sm:mt-14 px-4 sm:px-6 md:px-0">
                 {% if auth().check() %}
-                <form method="POST" action="" novalidate>
+                <form method="POST" action="{{ route('posts.comment', {slug: post.slug}) }}" novalidate>
                      {{ csrf_field()|raw }}
                     <input type="text" name="comment" value="{{ old('comment') }}" placeholder="Écrivez votre commentaire et tapez sur ↵"
                     class="w-full h-14 px-6 border-none focus:outline-none focus:ring-0 bg-gray-100 rounded-full">
