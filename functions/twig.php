@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+use Gravatar\Gravatar;
 use VGuyomarch\Foundation\Authentication;
 use VGuyomarch\Foundation\Router\Router;
 use VGuyomarch\Foundation\Session;
@@ -60,5 +61,13 @@ if(!function_exists('old')) {
     function old(string $key, mixed $default = null): mixed
     {
         return View::old($key, $default);
+    }
+}
+
+if(!function_exists('gravatar')) {
+    function gravatar(string $email): string
+    {
+        $gravatar = new Gravatar();
+        return $gravatar->avatar($email);
     }
 }

@@ -169,8 +169,8 @@
                 <div class="mt-10 sm:mt-14 space-y-8">
                     {% for comment in post.comments %}
                     <div class="flex space-x-3">
-                        <img src="https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
-                            alt=""
+                        <img src="{{ gravatar(comment.user.email) }}"
+                            alt="{{ gravatar(comment.user.email) }}"
                             class="h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white">
                         <div>
                             <p class="text-gray-800">
