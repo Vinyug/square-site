@@ -1,7 +1,6 @@
 <?php declare(strict_types=1);
 
 use App\Controllers\AuthController;
-use App\Controllers\BaseController;
 use App\Controllers\HomeController;
 use App\Controllers\PostController;
 use VGuyomarch\Foundation\Router\Route;
